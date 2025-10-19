@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simpan Di Sini Bis - Angkabet</title>
+    <title>FireUpload - Simpan Di Sini Bis</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,50 +14,90 @@
         }
 
         :root {
-            --primary: #4361ee;
-            --secondary: #3a0ca3;
-            --accent: #4cc9f0;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #4ade80;
-            --danger: #f72585;
-            --warning: #f59e0b;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --fire-primary: #ff6b00;
+            --fire-secondary: #ff3c00;
+            --fire-accent: #ff9500;
+            --fire-dark: #1a1a1a;
+            --fire-darker: #0f0f0f;
+            --fire-light: #2a2a2a;
+            --fire-text: #ffffff;
+            --fire-success: #00ff88;
+            --fire-danger: #ff2a6d;
+            --fire-warning: #ffcc00;
+            --shadow: 0 4px 20px rgba(255, 107, 0, 0.3);
             --radius: 12px;
-            --glow: 0 0 15px rgba(67, 97, 238, 0.3);
+            --glow: 0 0 20px rgba(255, 107, 0, 0.5);
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2a1a0f 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            color: var(--fire-text);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Fire Animation Background */
+        .fire-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 107, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 60, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 149, 0, 0.08) 0%, transparent 50%);
+            z-index: -1;
+            animation: firePulse 8s ease-in-out infinite;
+        }
+
+        @keyframes firePulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
         }
 
         .container {
             width: 100%;
-            max-width: 1000px;
-            background-color: white;
+            max-width: 1200px;
+            background: rgba(26, 26, 26, 0.85);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             overflow: hidden;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.8s ease;
+            border: 1px solid rgba(255, 107, 0, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--fire-primary), var(--fire-secondary), var(--fire-accent));
+            z-index: 10;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            padding: 25px 30px;
+            background: linear-gradient(to right, var(--fire-darker), var(--fire-dark));
+            color: var(--fire-text);
+            padding: 30px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-bottom: 1px solid rgba(255, 107, 0, 0.3);
         }
 
         .header::before {
@@ -67,8 +107,18 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse 8s infinite linear;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
+            animation: pulse 12s infinite linear;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--fire-primary), transparent);
         }
 
         @keyframes pulse {
@@ -77,16 +127,28 @@
         }
 
         .header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 8px;
-            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
             position: relative;
+            text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+            background: linear-gradient(to right, var(--fire-primary), var(--fire-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .header p {
             opacity: 0.9;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             position: relative;
+            color: #cccccc;
+        }
+
+        .header-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            color: var(--fire-primary);
+            text-shadow: 0 0 10px rgba(255, 107, 0, 0.7);
         }
 
         .content {
@@ -94,76 +156,102 @@
         }
 
         .upload-area {
-            border: 3px dashed var(--accent);
+            border: 2px dashed rgba(255, 107, 0, 0.5);
             border-radius: var(--radius);
-            padding: 40px 20px;
+            padding: 50px 20px;
             text-align: center;
             margin-bottom: 30px;
-            background-color: rgba(76, 201, 240, 0.05);
+            background: rgba(42, 42, 42, 0.5);
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
         }
 
         .upload-area.active {
-            border-color: var(--primary);
-            background-color: rgba(67, 97, 238, 0.1);
+            border-color: var(--fire-primary);
+            background: rgba(255, 107, 0, 0.1);
             box-shadow: var(--glow);
         }
 
         .upload-area:hover {
-            background-color: rgba(76, 201, 240, 0.1);
-            transform: translateY(-3px);
+            background: rgba(255, 107, 0, 0.15);
+            transform: translateY(-5px);
+            border-color: var(--fire-accent);
         }
 
         .upload-area i {
-            font-size: 3.5rem;
-            color: var(--accent);
-            margin-bottom: 15px;
+            font-size: 4rem;
+            color: var(--fire-accent);
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 149, 0, 0.7);
         }
 
         .upload-area h3 {
-            color: var(--primary);
-            margin-bottom: 10px;
-            font-size: 1.5rem;
+            color: var(--fire-primary);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
         }
 
         .upload-area p {
-            color: var(--dark);
-            opacity: 0.7;
-            margin-bottom: 20px;
+            color: #cccccc;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
         }
 
         .paste-info {
-            background-color: rgba(245, 158, 11, 0.1);
-            border: 1px dashed var(--warning);
+            background: rgba(255, 204, 0, 0.1);
+            border: 1px dashed var(--fire-warning);
             border-radius: 8px;
-            padding: 10px;
-            margin-top: 15px;
-            color: var(--dark);
-            font-size: 0.9rem;
+            padding: 12px;
+            margin-top: 20px;
+            color: var(--fire-warning);
+            font-size: 1rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .btn {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(to right, var(--fire-primary), var(--fire-secondary));
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 14px 30px;
             border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.6);
         }
 
         .btn:active {
@@ -171,123 +259,157 @@
         }
 
         .btn-secondary {
-            background: linear-gradient(to right, var(--accent), #4895ef);
+            background: linear-gradient(to right, var(--fire-accent), #ff7700);
         }
 
         .btn-success {
-            background: linear-gradient(to right, var(--success), #16a34a);
+            background: linear-gradient(to right, var(--fire-success), #00cc6a);
         }
 
         .btn-danger {
-            background: linear-gradient(to right, var(--danger), #e11d48);
+            background: linear-gradient(to right, var(--fire-danger), #ff0055);
+        }
+
+        .btn-warning {
+            background: linear-gradient(to right, var(--fire-warning), #ffaa00);
         }
 
         .uploaded-images {
-            margin-top: 30px;
+            margin-top: 40px;
+        }
+
+        .uploaded-images-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 107, 0, 0.3);
         }
 
         .uploaded-images h2 {
-            color: var(--dark);
-            margin-bottom: 20px;
-            font-size: 1.6rem;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(67, 97, 238, 0.1);
+            color: var(--fire-primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
         }
 
         .image-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
         }
 
         .image-item {
-            background-color: var(--light);
+            background: linear-gradient(145deg, var(--fire-light), var(--fire-dark));
             border-radius: var(--radius);
-            padding: 15px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
-            animation: slideIn 0.4s ease;
+            animation: slideIn 0.5s ease;
+            border: 1px solid rgba(255, 107, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--fire-primary), var(--fire-accent));
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .image-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(255, 107, 0, 0.3);
+            border-color: rgba(255, 107, 0, 0.5);
         }
 
         .image-preview {
             width: 100%;
-            height: 150px;
+            height: 180px;
             object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 107, 0, 0.3);
         }
 
         .image-link {
             display: flex;
             align-items: center;
-            background-color: white;
+            background: rgba(42, 42, 42, 0.8);
             border-radius: 8px;
-            padding: 8px 12px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 107, 0, 0.2);
         }
 
         .image-link input {
             flex: 1;
             border: none;
             outline: none;
-            font-size: 0.85rem;
-            color: var(--dark);
+            font-size: 0.9rem;
+            color: var(--fire-text);
             background: transparent;
         }
 
         .copy-btn {
             background: transparent;
             border: none;
-            color: var(--primary);
+            color: var(--fire-accent);
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
             transition: all 0.2s ease;
             padding: 5px;
             border-radius: 4px;
         }
 
         .copy-btn:hover {
-            background-color: rgba(67, 97, 238, 0.1);
-            color: var(--secondary);
+            background-color: rgba(255, 149, 0, 0.1);
+            color: var(--fire-primary);
+            transform: scale(1.1);
         }
 
         .actions {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .actions button {
-            padding: 6px 12px;
-            font-size: 0.8rem;
+            padding: 8px 15px;
+            font-size: 0.85rem;
         }
 
         .notification {
             position: fixed;
             top: 20px;
             right: 20px;
-            background-color: var(--success);
+            background: linear-gradient(to right, var(--fire-primary), var(--fire-secondary));
             color: white;
-            padding: 15px 25px;
+            padding: 18px 25px;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             transform: translateX(150%);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
             z-index: 1000;
+            border-left: 4px solid var(--fire-accent);
         }
 
         .notification.show {
@@ -295,14 +417,25 @@
         }
 
         .notification.error {
-            background-color: var(--danger);
+            background: linear-gradient(to right, var(--fire-danger), #ff0055);
+            border-left-color: #ff2a6d;
+        }
+
+        .notification.warning {
+            background: linear-gradient(to right, var(--fire-warning), #ffaa00);
+            border-left-color: #ffcc00;
+        }
+
+        .notification.success {
+            background: linear-gradient(to right, var(--fire-success), #00cc6a);
+            border-left-color: #00ff88;
         }
 
         .progress-bar {
-            height: 5px;
+            height: 4px;
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 10px;
-            margin-top: 10px;
+            margin-top: 12px;
             overflow: hidden;
         }
 
@@ -319,15 +452,58 @@
 
         .empty-state {
             text-align: center;
-            padding: 40px 20px;
-            color: var(--dark);
-            opacity: 0.7;
+            padding: 50px 20px;
+            color: #cccccc;
+            grid-column: 1 / -1;
         }
 
         .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: var(--accent);
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--fire-accent);
+            opacity: 0.7;
+        }
+
+        .empty-state p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .new-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(to right, var(--fire-success), #00cc6a);
+            color: var(--fire-darker);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            animation: pulse-badge 2s infinite;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes pulse-badge {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .flame {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, var(--fire-primary) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(5px);
+            animation: flameFloat 3s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes flameFloat {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+            50% { transform: translateY(-10px) scale(1.2); opacity: 1; }
         }
 
         @media (max-width: 768px) {
@@ -336,38 +512,72 @@
             }
             
             .header h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
             .content {
                 padding: 20px;
             }
+            
+            .uploaded-images-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .action-buttons {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="fire-bg"></div>
+    
+    <!-- Floating flames -->
+    <div class="flame" style="top: 10%; left: 5%;"></div>
+    <div class="flame" style="top: 20%; right: 10%;"></div>
+    <div class="flame" style="bottom: 15%; left: 15%;"></div>
+    <div class="flame" style="bottom: 25%; right: 5%;"></div>
+    
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-cloud-upload-alt"></i> Simpan Di Sini Bis - Angkabet</h1>
-            <p>Upload gambar dan dapatkan link Lubis secara instan</p>
+            <h1><i class="fas fa-fire header-icon"></i> LUBIS - Angkabet</h1>
+            <p>Upload gambar dan dapatkan link secara instan dengan tema api yang membara</p>
         </div>
         
         <div class="content">
             <div class="upload-area" id="uploadArea">
-                <i class="fas fa-images"></i>
-                <h3>Seret & Jatuhkan Gambar di Sini</h3>
-                <p>atau klik untuk memilih file (tanpa batas jumlah gambar)</p>
+                <i class="fas fa-fire"></i>
+                <h3>Lepaskan Gambar di Sini</h3>
+                <p>Atau klik untuk memilih file (mendukung banyak gambar sekaligus)</p>
                 <div class="paste-info">
                     <i class="fas fa-paste"></i> Anda juga bisa paste (Ctrl+V) gambar dari clipboard
                 </div>
                 <button class="btn" id="browseBtn">
-                    <i class="fas fa-folder-open"></i> Pilih File
+                    <i class="fas fa-folder-open"></i> Pilih File Gambar
                 </button>
                 <input type="file" id="fileInput" multiple accept="image/*" class="hidden">
             </div>
             
             <div class="uploaded-images" id="uploadedImages">
-                <h2>Gambar yang Diupload</h2>
+                <div class="uploaded-images-header">
+                    <h2><i class="fas fa-images"></i> Gambar yang Diupload</h2>
+                    <div class="action-buttons">
+                        <button class="btn btn-warning" id="copyAllBtn">
+                            <i class="fas fa-copy"></i> Salin Semua
+                        </button>
+                        <button class="btn btn-danger" id="deleteAllBtn">
+                            <i class="fas fa-fire"></i> Hapus Semua
+                        </button>
+                    </div>
+                </div>
                 <div class="image-list" id="imageList">
                     <div class="empty-state" id="emptyState">
                         <i class="fas fa-image"></i>
@@ -396,6 +606,8 @@
             const notification = document.getElementById('notification');
             const notificationText = document.getElementById('notificationText');
             const notificationProgress = document.getElementById('notificationProgress');
+            const copyAllBtn = document.getElementById('copyAllBtn');
+            const deleteAllBtn = document.getElementById('deleteAllBtn');
             
             // Store uploaded images data
             let uploadedImages = [];
@@ -442,6 +654,12 @@
                     }
                 }
             });
+            
+            // Copy all links button
+            copyAllBtn.addEventListener('click', copyAllLinks);
+            
+            // Delete all images button
+            deleteAllBtn.addEventListener('click', deleteAllImages);
             
             // Load images from localStorage
             function loadImagesFromStorage() {
@@ -504,13 +722,15 @@
                         // Remove temp image
                         removeTempImage(tempId);
                         
-                        // Add to uploaded images
-                        uploadedImages.push({
+                        // Add to uploaded images at the beginning (newest first)
+                        uploadedImages.unshift({
                             id: data.data.id,
                             name: file.name,
                             preview: data.data.url,
                             link: data.data.url,
-                            deleteUrl: data.data.delete_url
+                            deleteUrl: data.data.delete_url,
+                            timestamp: Date.now(),
+                            isNew: true
                         });
                         
                         // Save to localStorage
@@ -521,6 +741,16 @@
                         
                         // Show success notification
                         showNotification('Gambar berhasil diupload!', 'success');
+                        
+                        // Remove new badge after 5 seconds
+                        setTimeout(() => {
+                            const index = uploadedImages.findIndex(img => img.id === data.data.id);
+                            if (index !== -1) {
+                                uploadedImages[index].isNew = false;
+                                saveImagesToStorage();
+                                updateImageList();
+                            }
+                        }, 5000);
                     } else {
                         removeTempImage(tempId);
                         showNotification('Gagal mengupload gambar: ' + data.error.message, 'error');
@@ -541,7 +771,7 @@
                 tempItem.innerHTML = `
                     <img src="${preview}" alt="${name}" class="image-preview" style="opacity:0.7">
                     <div class="image-link">
-                        <input type="text" value="Mengupload..." readonly style="color:#666">
+                        <input type="text" value="Mengupload..." readonly style="color:#999">
                         <button class="copy-btn" disabled>
                             <i class="fas fa-copy"></i>
                         </button>
@@ -561,7 +791,8 @@
                     emptyState.style.display = 'none';
                 }
                 
-                imageList.appendChild(tempItem);
+                // Add at the beginning of the list
+                imageList.insertBefore(tempItem, imageList.firstChild);
             }
             
             // Remove temporary image
@@ -585,10 +816,21 @@
                 
                 emptyState.style.display = 'none';
                 
+                // Sort by timestamp (newest first)
+                uploadedImages.sort((a, b) => b.timestamp - a.timestamp);
+                
                 uploadedImages.forEach(image => {
                     const imageItem = document.createElement('div');
                     imageItem.className = 'image-item';
+                    imageItem.style.position = 'relative';
+                    
+                    let newBadge = '';
+                    if (image.isNew) {
+                        newBadge = '<div class="new-badge">BARU</div>';
+                    }
+                    
                     imageItem.innerHTML = `
+                        ${newBadge}
                         <img src="${image.preview}" alt="${image.name}" class="image-preview">
                         <div class="image-link">
                             <input type="text" value="${image.link}" readonly>
@@ -635,6 +877,33 @@
                 showNotification('Gambar berhasil dihapus', 'success');
             }
             
+            // Delete all images
+            function deleteAllImages() {
+                if (uploadedImages.length === 0) {
+                    showNotification('Tidak ada gambar untuk dihapus', 'warning');
+                    return;
+                }
+                
+                if (confirm(`Apakah Anda yakin ingin menghapus semua ${uploadedImages.length} gambar?`)) {
+                    uploadedImages = [];
+                    saveImagesToStorage();
+                    updateImageList();
+                    showNotification('Semua gambar berhasil dihapus', 'success');
+                }
+            }
+            
+            // Copy all links to clipboard
+            function copyAllLinks() {
+                if (uploadedImages.length === 0) {
+                    showNotification('Tidak ada gambar untuk disalin', 'warning');
+                    return;
+                }
+                
+                const allLinks = uploadedImages.map(image => image.link).join('\n');
+                copyToClipboard(allLinks);
+                showNotification(`Semua ${uploadedImages.length} link berhasil disalin!`, 'success');
+            }
+            
             // Copy text to clipboard
             function copyToClipboard(text) {
                 const textarea = document.createElement('textarea');
@@ -652,8 +921,10 @@
                 // Set color based on type
                 if (type === 'error') {
                     notification.className = 'notification error show';
+                } else if (type === 'warning') {
+                    notification.className = 'notification warning show';
                 } else {
-                    notification.className = 'notification show';
+                    notification.className = 'notification success show';
                 }
                 
                 // Animate progress bar
