@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FireUpload - Simpan Di Sini Bis</title>
+    <title>EmeraldUpload - Simpan Di Sini Bis</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,63 +14,64 @@
         }
 
         :root {
-            --fire-primary: #ff6b00;
-            --fire-secondary: #ff3c00;
-            --fire-accent: #ff9500;
-            --fire-dark: #1a1a1a;
-            --fire-darker: #0f0f0f;
-            --fire-light: #2a2a2a;
-            --fire-text: #ffffff;
-            --fire-success: #00ff88;
-            --fire-danger: #ff2a6d;
-            --fire-warning: #ffcc00;
-            --shadow: 0 4px 20px rgba(255, 107, 0, 0.3);
-            --radius: 12px;
-            --glow: 0 0 20px rgba(255, 107, 0, 0.5);
+            --emerald-primary: #10b981;
+            --emerald-secondary: #059669;
+            --emerald-accent: #34d399;
+            --emerald-dark: #0f172a;
+            --emerald-darker: #020617;
+            --emerald-light: #1e293b;
+            --emerald-text: #f8fafc;
+            --emerald-success: #10b981;
+            --emerald-danger: #ef4444;
+            --emerald-warning: #f59e0b;
+            --emerald-gold: #fbbf24;
+            --shadow: 0 8px 30px rgba(16, 185, 129, 0.15);
+            --radius: 16px;
+            --glow: 0 0 30px rgba(16, 185, 129, 0.3);
         }
 
         body {
-            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2a1a0f 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0d9488 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            color: var(--fire-text);
+            color: var(--emerald-text);
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Fire Animation Background */
-        .fire-bg {
+        /* Emerald Animation Background */
+        .emerald-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(255, 107, 0, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 60, 0, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255, 149, 0, 0.08) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(5, 150, 105, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(52, 211, 153, 0.06) 0%, transparent 50%);
             z-index: -1;
-            animation: firePulse 8s ease-in-out infinite;
+            animation: emeraldPulse 10s ease-in-out infinite;
         }
 
-        @keyframes firePulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
+        @keyframes emeraldPulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.8; }
         }
 
         .container {
             width: 100%;
             max-width: 1200px;
-            background: rgba(26, 26, 26, 0.85);
+            background: rgba(15, 23, 42, 0.85);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             overflow: hidden;
             animation: fadeIn 0.8s ease;
-            border: 1px solid rgba(255, 107, 0, 0.2);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            backdrop-filter: blur(20px);
             position: relative;
         }
 
@@ -81,7 +82,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(to right, var(--fire-primary), var(--fire-secondary), var(--fire-accent));
+            background: linear-gradient(to right, transparent, var(--emerald-primary), var(--emerald-accent), transparent);
             z-index: 10;
         }
 
@@ -91,145 +92,150 @@
         }
 
         .header {
-            background: linear-gradient(to right, var(--fire-darker), var(--fire-dark));
-            color: var(--fire-text);
-            padding: 30px;
+            background: linear-gradient(135deg, var(--emerald-darker), var(--emerald-dark));
+            color: var(--emerald-text);
+            padding: 40px 35px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            border-bottom: 1px solid rgba(255, 107, 0, 0.3);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
         }
 
         .header::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
-            animation: pulse 12s infinite linear;
-        }
-
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
             width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--fire-primary), transparent);
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(16, 185, 129, 0.03) 50%, transparent 70%);
+            animation: shine 8s infinite linear;
         }
 
-        @keyframes pulse {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 800;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
             position: relative;
-            text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
-            background: linear-gradient(to right, var(--fire-primary), var(--fire-accent));
+            background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-accent), var(--emerald-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            text-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
         }
 
         .header p {
             opacity: 0.9;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             position: relative;
-            color: #cccccc;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
         .header-icon {
-            font-size: 2rem;
-            margin-right: 15px;
-            color: var(--fire-primary);
-            text-shadow: 0 0 10px rgba(255, 107, 0, 0.7);
+            font-size: 2.5rem;
+            margin-right: 20px;
+            background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 5px 15px rgba(16, 185, 129, 0.4));
         }
 
         .content {
-            padding: 30px;
+            padding: 40px;
         }
 
         .upload-area {
-            border: 2px dashed rgba(255, 107, 0, 0.5);
+            border: 2px dashed rgba(16, 185, 129, 0.4);
             border-radius: var(--radius);
-            padding: 50px 20px;
+            padding: 60px 40px;
             text-align: center;
-            margin-bottom: 30px;
-            background: rgba(42, 42, 42, 0.5);
-            transition: all 0.3s ease;
+            margin-bottom: 40px;
+            background: rgba(30, 41, 59, 0.5);
+            transition: all 0.4s ease;
             cursor: pointer;
             position: relative;
+            backdrop-filter: blur(10px);
         }
 
         .upload-area.active {
-            border-color: var(--fire-primary);
-            background: rgba(255, 107, 0, 0.1);
+            border-color: var(--emerald-primary);
+            background: rgba(16, 185, 129, 0.1);
             box-shadow: var(--glow);
+            transform: translateY(-5px);
         }
 
         .upload-area:hover {
-            background: rgba(255, 107, 0, 0.15);
-            transform: translateY(-5px);
-            border-color: var(--fire-accent);
+            background: rgba(16, 185, 129, 0.15);
+            transform: translateY(-8px);
+            border-color: var(--emerald-accent);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.2);
         }
 
         .upload-area i {
-            font-size: 4rem;
-            color: var(--fire-accent);
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(255, 149, 0, 0.7);
+            font-size: 4.5rem;
+            color: var(--emerald-accent);
+            margin-bottom: 25px;
+            filter: drop-shadow(0 5px 15px rgba(52, 211, 153, 0.3));
         }
 
         .upload-area h3 {
-            color: var(--fire-primary);
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-            font-weight: 700;
+            color: var(--emerald-primary);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .upload-area p {
-            color: #cccccc;
+            color: #cbd5e1;
             opacity: 0.9;
-            margin-bottom: 25px;
-            font-size: 1.1rem;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
 
         .paste-info {
-            background: rgba(255, 204, 0, 0.1);
-            border: 1px dashed var(--fire-warning);
-            border-radius: 8px;
-            padding: 12px;
-            margin-top: 20px;
-            color: var(--fire-warning);
-            font-size: 1rem;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-top: 25px;
+            color: var(--emerald-warning);
+            font-size: 1.1rem;
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
+            backdrop-filter: blur(10px);
         }
 
         .btn {
-            background: linear-gradient(to right, var(--fire-primary), var(--fire-secondary));
+            background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-secondary));
             color: white;
             border: none;
-            padding: 14px 30px;
+            padding: 16px 35px;
             border-radius: 50px;
             font-size: 1.1rem;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            gap: 12px;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+            letter-spacing: 0.5px;
             position: relative;
             overflow: hidden;
         }
@@ -242,7 +248,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
+            transition: 0.6s;
         }
 
         .btn:hover::before {
@@ -251,7 +257,8 @@
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.6);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
+            background: linear-gradient(135deg, var(--emerald-accent), var(--emerald-primary));
         }
 
         .btn:active {
@@ -259,62 +266,67 @@
         }
 
         .btn-secondary {
-            background: linear-gradient(to right, var(--fire-accent), #ff7700);
+            background: linear-gradient(135deg, var(--emerald-accent), #10b981);
         }
 
         .btn-success {
-            background: linear-gradient(to right, var(--fire-success), #00cc6a);
+            background: linear-gradient(135deg, var(--emerald-success), #059669);
         }
 
         .btn-danger {
-            background: linear-gradient(to right, var(--fire-danger), #ff0055);
+            background: linear-gradient(135deg, var(--emerald-danger), #dc2626);
         }
 
         .btn-warning {
-            background: linear-gradient(to right, var(--fire-warning), #ffaa00);
+            background: linear-gradient(135deg, var(--emerald-warning), #d97706);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--emerald-gold), #f59e0b);
         }
 
         .uploaded-images {
-            margin-top: 40px;
+            margin-top: 50px;
         }
 
         .uploaded-images-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 107, 0, 0.3);
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
         }
 
         .uploaded-images h2 {
-            color: var(--fire-primary);
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
+            color: var(--emerald-primary);
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .action-buttons {
             display: flex;
-            gap: 15px;
+            gap: 20px;
         }
 
         .image-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
         }
 
         .image-item {
-            background: linear-gradient(145deg, var(--fire-light), var(--fire-dark));
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
             border-radius: var(--radius);
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            animation: slideIn 0.5s ease;
-            border: 1px solid rgba(255, 107, 0, 0.2);
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            animation: slideIn 0.6s ease;
+            border: 1px solid rgba(16, 185, 129, 0.2);
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
         .image-item::before {
@@ -324,7 +336,7 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(to right, var(--fire-primary), var(--fire-accent));
+            background: linear-gradient(to right, transparent, var(--emerald-primary), transparent);
         }
 
         @keyframes slideIn {
@@ -334,82 +346,85 @@
 
         .image-item:hover {
             transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(255, 107, 0, 0.3);
-            border-color: rgba(255, 107, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.4);
         }
 
         .image-preview {
             width: 100%;
-            height: 180px;
+            height: 200px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 107, 0, 0.3);
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .image-link {
             display: flex;
             align-items: center;
-            background: rgba(42, 42, 42, 0.8);
-            border-radius: 8px;
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 107, 0, 0.2);
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 12px;
+            padding: 12px 18px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
         .image-link input {
             flex: 1;
             border: none;
             outline: none;
-            font-size: 0.9rem;
-            color: var(--fire-text);
+            font-size: 0.95rem;
+            color: var(--emerald-text);
             background: transparent;
         }
 
         .copy-btn {
             background: transparent;
             border: none;
-            color: var(--fire-accent);
+            color: var(--emerald-accent);
             cursor: pointer;
             font-size: 1.1rem;
-            transition: all 0.2s ease;
-            padding: 5px;
-            border-radius: 4px;
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 8px;
         }
 
         .copy-btn:hover {
-            background-color: rgba(255, 149, 0, 0.1);
-            color: var(--fire-primary);
+            background-color: rgba(52, 211, 153, 0.1);
+            color: var(--emerald-primary);
             transform: scale(1.1);
         }
 
         .actions {
             display: flex;
             justify-content: space-between;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .actions button {
-            padding: 8px 15px;
-            font-size: 0.85rem;
+            padding: 10px 20px;
+            font-size: 0.9rem;
         }
 
         .notification {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(to right, var(--fire-primary), var(--fire-secondary));
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-secondary));
             color: white;
-            padding: 18px 25px;
+            padding: 20px 30px;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             transform: translateX(150%);
-            transition: transform 0.4s ease;
+            transition: transform 0.5s ease;
             z-index: 1000;
-            border-left: 4px solid var(--fire-accent);
+            border-left: 4px solid var(--emerald-accent);
+            min-width: 320px;
+            backdrop-filter: blur(10px);
         }
 
         .notification.show {
@@ -417,25 +432,25 @@
         }
 
         .notification.error {
-            background: linear-gradient(to right, var(--fire-danger), #ff0055);
-            border-left-color: #ff2a6d;
+            background: linear-gradient(135deg, var(--emerald-danger), #dc2626);
+            border-left-color: #ef4444;
         }
 
         .notification.warning {
-            background: linear-gradient(to right, var(--fire-warning), #ffaa00);
-            border-left-color: #ffcc00;
+            background: linear-gradient(135deg, var(--emerald-warning), #d97706);
+            border-left-color: #f59e0b;
         }
 
         .notification.success {
-            background: linear-gradient(to right, var(--fire-success), #00cc6a);
-            border-left-color: #00ff88;
+            background: linear-gradient(135deg, var(--emerald-success), #059669);
+            border-left-color: #10b981;
         }
 
         .progress-bar {
             height: 4px;
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 10px;
-            margin-top: 12px;
+            margin-top: 15px;
             overflow: hidden;
         }
 
@@ -443,7 +458,7 @@
             height: 100%;
             background-color: white;
             width: 0%;
-            transition: width 0.3s ease;
+            transition: width 0.4s ease;
         }
 
         .hidden {
@@ -452,58 +467,71 @@
 
         .empty-state {
             text-align: center;
-            padding: 50px 20px;
-            color: #cccccc;
+            padding: 70px 40px;
+            color: #94a3b8;
             grid-column: 1 / -1;
         }
 
         .empty-state i {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: var(--fire-accent);
+            font-size: 5rem;
+            margin-bottom: 25px;
+            color: var(--emerald-accent);
             opacity: 0.7;
+            filter: drop-shadow(0 5px 15px rgba(52, 211, 153, 0.3));
         }
 
         .empty-state p {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             opacity: 0.8;
         }
 
         .new-badge {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(to right, var(--fire-success), #00cc6a);
-            color: var(--fire-darker);
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: bold;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--emerald-gold), #f59e0b);
+            color: var(--emerald-darker);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
             animation: pulse-badge 2s infinite;
             z-index: 2;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+            letter-spacing: 0.5px;
         }
 
         @keyframes pulse-badge {
             0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
 
-        .flame {
+        .emerald-particle {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, var(--fire-primary) 0%, transparent 70%);
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, var(--emerald-accent) 0%, transparent 70%);
             border-radius: 50%;
-            filter: blur(5px);
-            animation: flameFloat 3s infinite ease-in-out;
+            filter: blur(3px);
+            animation: particleFloat 6s infinite ease-in-out;
             z-index: -1;
         }
 
-        @keyframes flameFloat {
-            0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
-            50% { transform: translateY(-10px) scale(1.2); opacity: 1; }
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        .luxury-border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: calc(var(--radius) - 4px);
+            pointer-events: none;
         }
 
         @media (max-width: 768px) {
@@ -512,17 +540,17 @@
             }
             
             .header h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .content {
-                padding: 20px;
+                padding: 30px 25px;
             }
             
             .uploaded-images-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 15px;
+                gap: 20px;
             }
             
             .action-buttons {
@@ -531,34 +559,41 @@
             }
             
             .btn {
-                padding: 12px 20px;
+                padding: 14px 25px;
                 font-size: 1rem;
+            }
+            
+            .upload-area {
+                padding: 40px 25px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="fire-bg"></div>
+    <div class="emerald-bg"></div>
     
-    <!-- Floating flames -->
-    <div class="flame" style="top: 10%; left: 5%;"></div>
-    <div class="flame" style="top: 20%; right: 10%;"></div>
-    <div class="flame" style="bottom: 15%; left: 15%;"></div>
-    <div class="flame" style="bottom: 25%; right: 5%;"></div>
+    <!-- Floating emerald particles -->
+    <div class="emerald-particle" style="top: 15%; left: 10%; animation-delay: 0s;"></div>
+    <div class="emerald-particle" style="top: 30%; right: 15%; animation-delay: 2s;"></div>
+    <div class="emerald-particle" style="bottom: 25%; left: 20%; animation-delay: 4s;"></div>
+    <div class="emerald-particle" style="bottom: 35%; right: 10%; animation-delay: 1s;"></div>
+    <div class="emerald-particle" style="top: 65%; left: 8%; animation-delay: 3s;"></div>
     
     <div class="container">
+        <div class="luxury-border"></div>
+        
         <div class="header">
-            <h1><i class="fas fa-fire header-icon"></i> LUBIS - Angkabet</h1>
-            <p>Upload gambar dan dapatkan link secara instan dengan tema api yang membara</p>
+            <h1><i class="fas fa-gem header-icon"></i> EmeraldUpload</h1>
+            <p>Upload gambar dengan gaya mewah dan dapatkan link secara instan</p>
         </div>
         
         <div class="content">
             <div class="upload-area" id="uploadArea">
-                <i class="fas fa-fire"></i>
-                <h3>Lepaskan Gambar di Sini</h3>
-                <p>Atau klik untuk memilih file (mendukung banyak gambar sekaligus)</p>
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Upload Gambar Anda</h3>
+                <p>Seret dan lepas gambar di sini atau klik untuk memilih file dari perangkat Anda</p>
                 <div class="paste-info">
-                    <i class="fas fa-paste"></i> Anda juga bisa paste (Ctrl+V) gambar dari clipboard
+                    <i class="fas fa-paste"></i> Tip: Anda juga bisa paste (Ctrl+V) gambar langsung dari clipboard
                 </div>
                 <button class="btn" id="browseBtn">
                     <i class="fas fa-folder-open"></i> Pilih File Gambar
@@ -568,13 +603,13 @@
             
             <div class="uploaded-images" id="uploadedImages">
                 <div class="uploaded-images-header">
-                    <h2><i class="fas fa-images"></i> Gambar yang Diupload</h2>
+                    <h2><i class="fas fa-images"></i> Koleksi Gambar</h2>
                     <div class="action-buttons">
-                        <button class="btn btn-warning" id="copyAllBtn">
+                        <button class="btn btn-gold" id="copyAllBtn">
                             <i class="fas fa-copy"></i> Salin Semua
                         </button>
                         <button class="btn btn-danger" id="deleteAllBtn">
-                            <i class="fas fa-fire"></i> Hapus Semua
+                            <i class="fas fa-trash"></i> Hapus Semua
                         </button>
                     </div>
                 </div>
@@ -771,7 +806,7 @@
                 tempItem.innerHTML = `
                     <img src="${preview}" alt="${name}" class="image-preview" style="opacity:0.7">
                     <div class="image-link">
-                        <input type="text" value="Mengupload..." readonly style="color:#999">
+                        <input type="text" value="Mengupload..." readonly style="color:#94a3b8">
                         <button class="copy-btn" disabled>
                             <i class="fas fa-copy"></i>
                         </button>
