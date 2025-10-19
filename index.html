@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simpan Di Sini Bis - Angkabet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4ade80;
+            --danger: #f72585;
+            --warning: #f59e0b;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --glow: 0 0 15px rgba(67, 97, 238, 0.3);
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 8s infinite linear;
+        }
+
+        @keyframes pulse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .upload-area {
+            border: 3px dashed var(--accent);
+            border-radius: var(--radius);
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: rgba(76, 201, 240, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .upload-area.active {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+            box-shadow: var(--glow);
+        }
+
+        .upload-area:hover {
+            background-color: rgba(76, 201, 240, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .upload-area i {
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .upload-area h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .upload-area p {
+            color: var(--dark);
+            opacity: 0.7;
+            margin-bottom: 20px;
+        }
+
+        .paste-info {
+            background-color: rgba(245, 158, 11, 0.1);
+            border: 1px dashed var(--warning);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 15px;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(to right, var(--accent), #4895ef);
+        }
+
+        .btn-success {
+            background: linear-gradient(to right, var(--success), #16a34a);
+        }
+
+        .btn-danger {
+            background: linear-gradient(to right, var(--danger), #e11d48);
+        }
+
+        .uploaded-images {
+            margin-top: 30px;
+        }
+
+        .uploaded-images h2 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(67, 97, 238, 0.1);
+        }
+
+        .image-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .image-item {
+            background-color: var(--light);
+            border-radius: var(--radius);
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-preview {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .image-link {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .image-link input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 0.85rem;
+            color: var(--dark);
+            background: transparent;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        .copy-btn:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--secondary);
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .actions button {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background-color: var(--danger);
+        }
+
+        .progress-bar {
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: white;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--dark);
+            opacity: 0.7;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .image-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-cloud-upload-alt"></i> Simpan Di Sini Bis - Angkabet</h1>
+            <p>Upload gambar dan dapatkan link Lubis secara instan</p>
+        </div>
+        
+        <div class="content">
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-images"></i>
+                <h3>Seret & Jatuhkan Gambar di Sini</h3>
+                <p>atau klik untuk memilih file (tanpa batas jumlah gambar)</p>
+                <div class="paste-info">
+                    <i class="fas fa-paste"></i> Anda juga bisa paste (Ctrl+V) gambar dari clipboard
+                </div>
+                <button class="btn" id="browseBtn">
+                    <i class="fas fa-folder-open"></i> Pilih File
+                </button>
+                <input type="file" id="fileInput" multiple accept="image/*" class="hidden">
+            </div>
+            
+            <div class="uploaded-images" id="uploadedImages">
+                <h2>Gambar yang Diupload</h2>
+                <div class="image-list" id="imageList">
+                    <div class="empty-state" id="emptyState">
+                        <i class="fas fa-image"></i>
+                        <p>Belum ada gambar yang diupload</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">Link berhasil disalin!</span>
+        <div class="progress-bar">
+            <div class="progress" id="notificationProgress"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            const browseBtn = document.getElementById('browseBtn');
+            const imageList = document.getElementById('imageList');
+            const emptyState = document.getElementById('emptyState');
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            const notificationProgress = document.getElementById('notificationProgress');
+            
+            // Store uploaded images data
+            let uploadedImages = [];
+            const apiKey = '9b7a0569d66f17a5188d0cdf0042a9f1';
+            
+            // Load images from localStorage on page load
+            loadImagesFromStorage();
+            
+            // Event listeners
+            browseBtn.addEventListener('click', () => fileInput.click());
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('active');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('active');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('active');
+                
+                const files = e.dataTransfer.files;
+                handleFiles(files);
+            });
+            
+            fileInput.addEventListener('change', () => {
+                handleFiles(fileInput.files);
+            });
+            
+            // Handle paste event (Ctrl+V)
+            document.addEventListener('paste', (e) => {
+                const items = e.clipboardData.items;
+                
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].type.indexOf('image') !== -1) {
+                        const file = items[i].getAsFile();
+                        if (file) {
+                            handleFiles([file]);
+                            break;
+                        }
+                    }
+                }
+            });
+            
+            // Load images from localStorage
+            function loadImagesFromStorage() {
+                const storedImages = localStorage.getItem('uploadedImages');
+                if (storedImages) {
+                    uploadedImages = JSON.parse(storedImages);
+                    updateImageList();
+                }
+            }
+            
+            // Save images to localStorage
+            function saveImagesToStorage() {
+                localStorage.setItem('uploadedImages', JSON.stringify(uploadedImages));
+            }
+            
+            // Handle selected files
+            function handleFiles(files) {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    
+                    if (!file.type.match('image.*')) {
+                        showNotification('Harap upload hanya file gambar', 'error');
+                        continue;
+                    }
+                    
+                    // Create a preview and upload to ImgBB
+                    const reader = new FileReader();
+                    
+                    reader.onload = (function(file) {
+                        return function(e) {
+                            uploadToImgBB(file, e.target.result);
+                        };
+                    })(file);
+                    
+                    reader.readAsDataURL(file);
+                }
+                
+                // Reset file input
+                fileInput.value = '';
+            }
+            
+            // Upload to ImgBB API
+            function uploadToImgBB(file, dataUrl) {
+                // Show uploading state
+                const tempId = 'temp-' + Date.now();
+                addTempImage(tempId, file.name, dataUrl);
+                
+                // Prepare form data
+                const formData = new FormData();
+                formData.append('image', dataUrl.split(',')[1]);
+                
+                // Upload to ImgBB
+                fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Remove temp image
+                        removeTempImage(tempId);
+                        
+                        // Add to uploaded images
+                        uploadedImages.push({
+                            id: data.data.id,
+                            name: file.name,
+                            preview: data.data.url,
+                            link: data.data.url,
+                            deleteUrl: data.data.delete_url
+                        });
+                        
+                        // Save to localStorage
+                        saveImagesToStorage();
+                        
+                        // Update the UI
+                        updateImageList();
+                        
+                        // Show success notification
+                        showNotification('Gambar berhasil diupload!', 'success');
+                    } else {
+                        removeTempImage(tempId);
+                        showNotification('Gagal mengupload gambar: ' + data.error.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    removeTempImage(tempId);
+                    console.error('Error:', error);
+                    showNotification('Terjadi kesalahan saat mengupload gambar', 'error');
+                });
+            }
+            
+            // Add temporary image while uploading
+            function addTempImage(id, name, preview) {
+                const tempItem = document.createElement('div');
+                tempItem.className = 'image-item';
+                tempItem.id = id;
+                tempItem.innerHTML = `
+                    <img src="${preview}" alt="${name}" class="image-preview" style="opacity:0.7">
+                    <div class="image-link">
+                        <input type="text" value="Mengupload..." readonly style="color:#666">
+                        <button class="copy-btn" disabled>
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="actions">
+                        <button class="btn btn-secondary" disabled>
+                            <i class="fas fa-eye"></i> Lihat
+                        </button>
+                        <button class="btn btn-danger" disabled>
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
+                    </div>
+                `;
+                
+                // Hide empty state if it's the first image
+                if (uploadedImages.length === 0) {
+                    emptyState.style.display = 'none';
+                }
+                
+                imageList.appendChild(tempItem);
+            }
+            
+            // Remove temporary image
+            function removeTempImage(id) {
+                const tempElement = document.getElementById(id);
+                if (tempElement) {
+                    tempElement.remove();
+                }
+            }
+            
+            // Update the image list in the UI
+            function updateImageList() {
+                // Clear the list first
+                imageList.innerHTML = '';
+                
+                if (uploadedImages.length === 0) {
+                    emptyState.style.display = 'block';
+                    imageList.appendChild(emptyState);
+                    return;
+                }
+                
+                emptyState.style.display = 'none';
+                
+                uploadedImages.forEach(image => {
+                    const imageItem = document.createElement('div');
+                    imageItem.className = 'image-item';
+                    imageItem.innerHTML = `
+                        <img src="${image.preview}" alt="${image.name}" class="image-preview">
+                        <div class="image-link">
+                            <input type="text" value="${image.link}" readonly>
+                            <button class="copy-btn" data-link="${image.link}">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <div class="actions">
+                            <button class="btn btn-secondary" onclick="window.open('${image.link}', '_blank')">
+                                <i class="fas fa-eye"></i> Lihat
+                            </button>
+                            <button class="btn btn-danger" data-id="${image.id}">
+                                <i class="fas fa-trash"></i> Hapus
+                            </button>
+                        </div>
+                    `;
+                    
+                    imageList.appendChild(imageItem);
+                });
+                
+                // Add event listeners to copy buttons
+                document.querySelectorAll('.copy-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const link = this.getAttribute('data-link');
+                        copyToClipboard(link);
+                        showNotification('Link berhasil disalin!', 'success');
+                    });
+                });
+                
+                // Add event listeners to delete buttons
+                document.querySelectorAll('.btn-danger').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        deleteImage(id);
+                    });
+                });
+            }
+            
+            // Delete an image
+            function deleteImage(id) {
+                uploadedImages = uploadedImages.filter(image => image.id !== id);
+                saveImagesToStorage();
+                updateImageList();
+                showNotification('Gambar berhasil dihapus', 'success');
+            }
+            
+            // Copy text to clipboard
+            function copyToClipboard(text) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            }
+            
+            // Show notification
+            function showNotification(message, type = 'success') {
+                notificationText.textContent = message;
+                
+                // Set color based on type
+                if (type === 'error') {
+                    notification.className = 'notification error show';
+                } else {
+                    notification.className = 'notification show';
+                }
+                
+                // Animate progress bar
+                notificationProgress.style.width = '100%';
+                
+                // Hide after 3 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notificationProgress.style.width = '0%';
+                    }, 300);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
