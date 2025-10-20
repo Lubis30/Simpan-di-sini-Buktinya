@@ -26,7 +26,7 @@
             --emerald-warning: #f59e0b;
             --emerald-gold: #fbbf24;
             --shadow: 0 8px 30px rgba(16, 185, 129, 0.15);
-            --radius: 16px;
+            --radius: 12px;
             --glow: 0 0 30px rgba(16, 185, 129, 0.3);
         }
 
@@ -42,7 +42,6 @@
             overflow-x: hidden;
         }
 
-        /* Emerald Animation Background */
         .emerald-bg {
             position: fixed;
             top: 0;
@@ -64,7 +63,7 @@
 
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1000px;
             background: rgba(15, 23, 42, 0.85);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
@@ -94,175 +93,121 @@
         .header {
             background: linear-gradient(135deg, var(--emerald-darker), var(--emerald-dark));
             color: var(--emerald-text);
-            padding: 40px 35px;
+            padding: 25px 30px;
             text-align: center;
             position: relative;
             overflow: hidden;
             border-bottom: 1px solid rgba(16, 185, 129, 0.3);
         }
 
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(45deg, transparent 30%, rgba(16, 185, 129, 0.03) 50%, transparent 70%);
-            animation: shine 8s infinite linear;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
         .header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            font-weight: 600;
             position: relative;
-            background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-accent), var(--emerald-gold));
+            background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-            text-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
         }
 
         .header p {
             opacity: 0.9;
-            font-size: 1.3rem;
+            font-size: 0.9rem;
             position: relative;
             color: #cbd5e1;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
         }
 
         .header-icon {
-            font-size: 2.5rem;
-            margin-right: 20px;
+            font-size: 1.5rem;
+            margin-right: 10px;
             background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 5px 15px rgba(16, 185, 129, 0.4));
         }
 
         .content {
-            padding: 40px;
+            padding: 25px;
         }
 
+        /* UPLOAD AREA YANG LEBIH SIMPLE */
         .upload-area {
             border: 2px dashed rgba(16, 185, 129, 0.4);
             border-radius: var(--radius);
-            padding: 60px 40px;
+            padding: 30px 20px;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
             background: rgba(30, 41, 59, 0.5);
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
-            backdrop-filter: blur(10px);
         }
 
         .upload-area.active {
             border-color: var(--emerald-primary);
             background: rgba(16, 185, 129, 0.1);
             box-shadow: var(--glow);
-            transform: translateY(-5px);
         }
 
         .upload-area:hover {
             background: rgba(16, 185, 129, 0.15);
-            transform: translateY(-8px);
             border-color: var(--emerald-accent);
-            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.2);
         }
 
         .upload-area i {
-            font-size: 4.5rem;
+            font-size: 2.5rem;
             color: var(--emerald-accent);
-            margin-bottom: 25px;
-            filter: drop-shadow(0 5px 15px rgba(52, 211, 153, 0.3));
+            margin-bottom: 15px;
         }
 
         .upload-area h3 {
             color: var(--emerald-primary);
-            margin-bottom: 20px;
-            font-size: 2rem;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
         }
 
         .upload-area p {
             color: #cbd5e1;
             opacity: 0.9;
-            margin-bottom: 30px;
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            line-height: 1.4;
         }
 
         .paste-info {
             background: rgba(245, 158, 11, 0.1);
             border: 1px solid rgba(245, 158, 11, 0.3);
-            border-radius: 12px;
-            padding: 15px 20px;
-            margin-top: 25px;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-top: 15px;
             color: var(--emerald-warning);
-            font-size: 1.1rem;
-            max-width: 500px;
+            font-size: 0.8rem;
+            max-width: 400px;
             margin-left: auto;
             margin-right: auto;
-            backdrop-filter: blur(10px);
         }
 
         .btn {
             background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-secondary));
             color: white;
             border: none;
-            padding: 16px 35px;
+            padding: 10px 20px;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
-            letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.6s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
             background: linear-gradient(135deg, var(--emerald-accent), var(--emerald-primary));
-        }
-
-        .btn:active {
-            transform: translateY(0);
         }
 
         .btn-secondary {
@@ -286,47 +231,45 @@
         }
 
         .uploaded-images {
-            margin-top: 50px;
+            margin-top: 30px;
         }
 
         .uploaded-images-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 35px;
-            padding-bottom: 25px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 1px solid rgba(16, 185, 129, 0.3);
         }
 
         .uploaded-images h2 {
             color: var(--emerald-primary);
-            font-size: 2rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
         }
 
         .action-buttons {
             display: flex;
-            gap: 20px;
+            gap: 10px;
         }
 
         .image-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
         }
 
         .image-item {
             background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
             border-radius: var(--radius);
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s ease;
-            animation: slideIn 0.6s ease;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            animation: slideIn 0.4s ease;
             border: 1px solid rgba(16, 185, 129, 0.2);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
         }
 
         .image-item::before {
@@ -335,38 +278,37 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
+            height: 2px;
             background: linear-gradient(to right, transparent, var(--emerald-primary), transparent);
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .image-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
             border-color: rgba(16, 185, 129, 0.4);
         }
 
         .image-preview {
             width: 100%;
-            height: 200px;
+            height: 140px;
             object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 25px;
+            border-radius: 8px;
+            margin-bottom: 15px;
             border: 1px solid rgba(16, 185, 129, 0.3);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .image-link {
             display: flex;
             align-items: center;
             background: rgba(30, 41, 59, 0.6);
-            border-radius: 12px;
-            padding: 12px 18px;
-            margin-bottom: 20px;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 12px;
             border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
@@ -374,7 +316,7 @@
             flex: 1;
             border: none;
             outline: none;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             color: var(--emerald-text);
             background: transparent;
         }
@@ -384,47 +326,45 @@
             border: none;
             color: var(--emerald-accent);
             cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            padding: 8px;
-            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            padding: 5px;
+            border-radius: 4px;
         }
 
         .copy-btn:hover {
             background-color: rgba(52, 211, 153, 0.1);
             color: var(--emerald-primary);
-            transform: scale(1.1);
         }
 
         .actions {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
+            margin-top: 12px;
         }
 
         .actions button {
-            padding: 10px 20px;
-            font-size: 0.9rem;
+            padding: 6px 12px;
+            font-size: 0.8rem;
         }
 
         .notification {
             position: fixed;
-            top: 30px;
-            right: 30px;
+            top: 20px;
+            right: 20px;
             background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-secondary));
             color: white;
-            padding: 20px 30px;
+            padding: 15px 20px;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             transform: translateX(150%);
-            transition: transform 0.5s ease;
+            transition: transform 0.3s ease;
             z-index: 1000;
-            border-left: 4px solid var(--emerald-accent);
-            min-width: 320px;
-            backdrop-filter: blur(10px);
+            border-left: 3px solid var(--emerald-accent);
+            min-width: 250px;
         }
 
         .notification.show {
@@ -447,10 +387,10 @@
         }
 
         .progress-bar {
-            height: 4px;
+            height: 3px;
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 10px;
-            margin-top: 15px;
+            margin-top: 10px;
             overflow: hidden;
         }
 
@@ -458,7 +398,7 @@
             height: 100%;
             background-color: white;
             width: 0%;
-            transition: width 0.4s ease;
+            transition: width 0.3s ease;
         }
 
         .hidden {
@@ -467,38 +407,35 @@
 
         .empty-state {
             text-align: center;
-            padding: 70px 40px;
+            padding: 40px 20px;
             color: #94a3b8;
             grid-column: 1 / -1;
         }
 
         .empty-state i {
-            font-size: 5rem;
-            margin-bottom: 25px;
+            font-size: 3rem;
+            margin-bottom: 15px;
             color: var(--emerald-accent);
             opacity: 0.7;
-            filter: drop-shadow(0 5px 15px rgba(52, 211, 153, 0.3));
         }
 
         .empty-state p {
-            font-size: 1.4rem;
+            font-size: 1rem;
             opacity: 0.8;
         }
 
         .new-badge {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 12px;
+            right: 12px;
             background: linear-gradient(135deg, var(--emerald-gold), #f59e0b);
             color: var(--emerald-darker);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
             font-weight: 700;
             animation: pulse-badge 2s infinite;
             z-index: 2;
-            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
-            letter-spacing: 0.5px;
         }
 
         @keyframes pulse-badge {
@@ -507,50 +444,23 @@
             100% { transform: scale(1); }
         }
 
-        .emerald-particle {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: radial-gradient(circle, var(--emerald-accent) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(3px);
-            animation: particleFloat 6s infinite ease-in-out;
-            z-index: -1;
-        }
-
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
-            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
-        }
-
-        .luxury-border {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            border: 1px solid rgba(16, 185, 129, 0.1);
-            border-radius: calc(var(--radius) - 4px);
-            pointer-events: none;
-        }
-
         @media (max-width: 768px) {
             .image-list {
                 grid-template-columns: 1fr;
             }
             
             .header h1 {
-                font-size: 2.2rem;
+                font-size: 1.5rem;
             }
             
             .content {
-                padding: 30px 25px;
+                padding: 20px;
             }
             
             .uploaded-images-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 20px;
+                gap: 15px;
             }
             
             .action-buttons {
@@ -559,12 +469,12 @@
             }
             
             .btn {
-                padding: 14px 25px;
-                font-size: 1rem;
+                padding: 8px 16px;
+                font-size: 0.85rem;
             }
             
             .upload-area {
-                padding: 40px 25px;
+                padding: 20px 15px;
             }
         }
     </style>
@@ -572,38 +482,30 @@
 <body>
     <div class="emerald-bg"></div>
     
-    <!-- Floating emerald particles -->
-    <div class="emerald-particle" style="top: 15%; left: 10%; animation-delay: 0s;"></div>
-    <div class="emerald-particle" style="top: 30%; right: 15%; animation-delay: 2s;"></div>
-    <div class="emerald-particle" style="bottom: 25%; left: 20%; animation-delay: 4s;"></div>
-    <div class="emerald-particle" style="bottom: 35%; right: 10%; animation-delay: 1s;"></div>
-    <div class="emerald-particle" style="top: 65%; left: 8%; animation-delay: 3s;"></div>
-    
     <div class="container">
-        <div class="luxury-border"></div>
-        
         <div class="header">
             <h1><i class="fas fa-gem header-icon"></i> EmeraldUpload</h1>
-            <p>Upload gambar dengan gaya mewah dan dapatkan link secara instan</p>
+            <p>Upload gambar dan dapatkan link secara instan</p>
         </div>
         
         <div class="content">
+            <!-- UPLOAD AREA YANG LEBIH SIMPLE -->
             <div class="upload-area" id="uploadArea">
                 <i class="fas fa-cloud-upload-alt"></i>
-                <h3>Upload Gambar Anda</h3>
-                <p>Seret dan lepas gambar di sini atau klik untuk memilih file dari perangkat Anda</p>
+                <h3>Upload Gambar</h3>
+                <p>Seret gambar atau klik untuk memilih file</p>
                 <div class="paste-info">
-                    <i class="fas fa-paste"></i> Tip: Anda juga bisa paste (Ctrl+V) gambar langsung dari clipboard
+                    <i class="fas fa-paste"></i> Ctrl+V untuk paste gambar
                 </div>
                 <button class="btn" id="browseBtn">
-                    <i class="fas fa-folder-open"></i> Pilih File Gambar
+                    <i class="fas fa-folder-open"></i> Pilih File
                 </button>
                 <input type="file" id="fileInput" multiple accept="image/*" class="hidden">
             </div>
             
             <div class="uploaded-images" id="uploadedImages">
                 <div class="uploaded-images-header">
-                    <h2><i class="fas fa-images"></i> Koleksi Gambar</h2>
+                    <h2><i class="fas fa-images"></i> Gambar Uploaded</h2>
                     <div class="action-buttons">
                         <button class="btn btn-gold" id="copyAllBtn">
                             <i class="fas fa-copy"></i> Salin Semua
@@ -644,14 +546,11 @@
             const copyAllBtn = document.getElementById('copyAllBtn');
             const deleteAllBtn = document.getElementById('deleteAllBtn');
             
-            // Store uploaded images data
             let uploadedImages = [];
             const apiKey = '9b7a0569d66f17a5188d0cdf0042a9f1';
             
-            // Load images from localStorage on page load
             loadImagesFromStorage();
             
-            // Event listeners
             browseBtn.addEventListener('click', () => fileInput.click());
             
             uploadArea.addEventListener('dragover', (e) => {
@@ -666,19 +565,15 @@
             uploadArea.addEventListener('drop', (e) => {
                 e.preventDefault();
                 uploadArea.classList.remove('active');
-                
-                const files = e.dataTransfer.files;
-                handleFiles(files);
+                handleFiles(e.dataTransfer.files);
             });
             
             fileInput.addEventListener('change', () => {
                 handleFiles(fileInput.files);
             });
             
-            // Handle paste event (Ctrl+V)
             document.addEventListener('paste', (e) => {
                 const items = e.clipboardData.items;
-                
                 for (let i = 0; i < items.length; i++) {
                     if (items[i].type.indexOf('image') !== -1) {
                         const file = items[i].getAsFile();
@@ -690,13 +585,9 @@
                 }
             });
             
-            // Copy all links button
             copyAllBtn.addEventListener('click', copyAllLinks);
-            
-            // Delete all images button
             deleteAllBtn.addEventListener('click', deleteAllImages);
             
-            // Load images from localStorage
             function loadImagesFromStorage() {
                 const storedImages = localStorage.getItem('uploadedImages');
                 if (storedImages) {
@@ -705,48 +596,36 @@
                 }
             }
             
-            // Save images to localStorage
             function saveImagesToStorage() {
                 localStorage.setItem('uploadedImages', JSON.stringify(uploadedImages));
             }
             
-            // Handle selected files
             function handleFiles(files) {
                 for (let i = 0; i < files.length; i++) {
                     const file = files[i];
-                    
                     if (!file.type.match('image.*')) {
-                        showNotification('Harap upload hanya file gambar', 'error');
+                        showNotification('Hanya file gambar yang diizinkan', 'error');
                         continue;
                     }
                     
-                    // Create a preview and upload to ImgBB
                     const reader = new FileReader();
-                    
                     reader.onload = (function(file) {
                         return function(e) {
                             uploadToImgBB(file, e.target.result);
                         };
                     })(file);
-                    
                     reader.readAsDataURL(file);
                 }
-                
-                // Reset file input
                 fileInput.value = '';
             }
             
-            // Upload to ImgBB API
             function uploadToImgBB(file, dataUrl) {
-                // Show uploading state
                 const tempId = 'temp-' + Date.now();
                 addTempImage(tempId, file.name, dataUrl);
                 
-                // Prepare form data
                 const formData = new FormData();
                 formData.append('image', dataUrl.split(',')[1]);
                 
-                // Upload to ImgBB
                 fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
                     method: 'POST',
                     body: formData
@@ -754,10 +633,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Remove temp image
                         removeTempImage(tempId);
-                        
-                        // Add to uploaded images at the beginning (newest first)
                         uploadedImages.unshift({
                             id: data.data.id,
                             name: file.name,
@@ -767,17 +643,10 @@
                             timestamp: Date.now(),
                             isNew: true
                         });
-                        
-                        // Save to localStorage
                         saveImagesToStorage();
-                        
-                        // Update the UI
                         updateImageList();
-                        
-                        // Show success notification
                         showNotification('Gambar berhasil diupload!', 'success');
                         
-                        // Remove new badge after 5 seconds
                         setTimeout(() => {
                             const index = uploadedImages.findIndex(img => img.id === data.data.id);
                             if (index !== -1) {
@@ -788,17 +657,15 @@
                         }, 5000);
                     } else {
                         removeTempImage(tempId);
-                        showNotification('Gagal mengupload gambar: ' + data.error.message, 'error');
+                        showNotification('Upload gagal: ' + data.error.message, 'error');
                     }
                 })
                 .catch(error => {
                     removeTempImage(tempId);
-                    console.error('Error:', error);
-                    showNotification('Terjadi kesalahan saat mengupload gambar', 'error');
+                    showNotification('Error saat upload gambar', 'error');
                 });
             }
             
-            // Add temporary image while uploading
             function addTempImage(id, name, preview) {
                 const tempItem = document.createElement('div');
                 tempItem.className = 'image-item';
@@ -821,16 +688,12 @@
                     </div>
                 `;
                 
-                // Hide empty state if it's the first image
                 if (uploadedImages.length === 0) {
                     emptyState.style.display = 'none';
                 }
-                
-                // Add at the beginning of the list
                 imageList.insertBefore(tempItem, imageList.firstChild);
             }
             
-            // Remove temporary image
             function removeTempImage(id) {
                 const tempElement = document.getElementById(id);
                 if (tempElement) {
@@ -838,9 +701,7 @@
                 }
             }
             
-            // Update the image list in the UI
             function updateImageList() {
-                // Clear the list first
                 imageList.innerHTML = '';
                 
                 if (uploadedImages.length === 0) {
@@ -850,8 +711,6 @@
                 }
                 
                 emptyState.style.display = 'none';
-                
-                // Sort by timestamp (newest first)
                 uploadedImages.sort((a, b) => b.timestamp - a.timestamp);
                 
                 uploadedImages.forEach(image => {
@@ -886,7 +745,6 @@
                     imageList.appendChild(imageItem);
                 });
                 
-                // Add event listeners to copy buttons
                 document.querySelectorAll('.copy-btn').forEach(button => {
                     button.addEventListener('click', function() {
                         const link = this.getAttribute('data-link');
@@ -895,7 +753,6 @@
                     });
                 });
                 
-                // Add event listeners to delete buttons
                 document.querySelectorAll('.btn-danger').forEach(button => {
                     button.addEventListener('click', function() {
                         const id = this.getAttribute('data-id');
@@ -904,7 +761,6 @@
                 });
             }
             
-            // Delete an image
             function deleteImage(id) {
                 uploadedImages = uploadedImages.filter(image => image.id !== id);
                 saveImagesToStorage();
@@ -912,14 +768,13 @@
                 showNotification('Gambar berhasil dihapus', 'success');
             }
             
-            // Delete all images
             function deleteAllImages() {
                 if (uploadedImages.length === 0) {
                     showNotification('Tidak ada gambar untuk dihapus', 'warning');
                     return;
                 }
                 
-                if (confirm(`Apakah Anda yakin ingin menghapus semua ${uploadedImages.length} gambar?`)) {
+                if (confirm(`Hapus semua ${uploadedImages.length} gambar?`)) {
                     uploadedImages = [];
                     saveImagesToStorage();
                     updateImageList();
@@ -927,7 +782,6 @@
                 }
             }
             
-            // Copy all links to clipboard
             function copyAllLinks() {
                 if (uploadedImages.length === 0) {
                     showNotification('Tidak ada gambar untuk disalin', 'warning');
@@ -936,10 +790,9 @@
                 
                 const allLinks = uploadedImages.map(image => image.link).join('\n');
                 copyToClipboard(allLinks);
-                showNotification(`Semua ${uploadedImages.length} link berhasil disalin!`, 'success');
+                showNotification(`${uploadedImages.length} link berhasil disalin!`, 'success');
             }
             
-            // Copy text to clipboard
             function copyToClipboard(text) {
                 const textarea = document.createElement('textarea');
                 textarea.value = text;
@@ -949,11 +802,9 @@
                 document.body.removeChild(textarea);
             }
             
-            // Show notification
             function showNotification(message, type = 'success') {
                 notificationText.textContent = message;
                 
-                // Set color based on type
                 if (type === 'error') {
                     notification.className = 'notification error show';
                 } else if (type === 'warning') {
@@ -962,10 +813,8 @@
                     notification.className = 'notification success show';
                 }
                 
-                // Animate progress bar
                 notificationProgress.style.width = '100%';
                 
-                // Hide after 3 seconds
                 setTimeout(() => {
                     notification.classList.remove('show');
                     setTimeout(() => {
