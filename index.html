@@ -170,6 +170,9 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .header p {
@@ -183,7 +186,6 @@
 
         .header-icon {
             font-size: 1.8rem;
-            margin-right: 10px;
             background: linear-gradient(135deg, var(--starlight-blue), var(--accent-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -587,6 +589,63 @@
             font-size: 0.9rem;
         }
 
+        /* STYLE UNTUK CHECKBOX DAN SELECTION */
+        .checkbox-container {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 2;
+        }
+
+        .image-checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid var(--accent-blue);
+            background-color: rgba(12, 20, 38, 0.7);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .image-checkbox:checked {
+            background-color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .image-checkbox:checked::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .selection-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .selection-actions.hidden {
+            display: none;
+        }
+
+        .selected-count {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
         @media (max-width: 768px) {
             .image-list {
                 grid-template-columns: 1fr;
@@ -627,6 +686,11 @@
             .header-content {
                 flex-direction: column;
             }
+            
+            .selection-actions {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -639,7 +703,11 @@
             <div class="header-content">
                 <img src="https://i.ibb.co/9mWct2X2/2102cf66be84.png" alt="Logo Memory Si Lubis" class="logo">
                 <div>
-                    <h1><i class="fas fa-gem header-icon"></i> MEMORY SI LUBIS</h1>
+                    <h1>
+                        <i class="fas fa-gem header-icon"></i> 
+                        MEMORY SI LUBIS 
+                        <i class="fas fa-gem header-icon"></i>
+                    </h1>
                     <p></p>
                 </div>
                 <img src="https://i.ibb.co/9mWct2X2/2102cf66be84.png" alt="Logo Memory Si Lubis" class="logo">
@@ -665,7 +733,7 @@
                 </div>
             </div>
             
-            <!-- UPLOAD AREA YANG LEBIH MEWAH DAN DIKECILKAN -->
+            <!-- UPLOAD AREA -->
             <div class="upload-area" id="uploadArea">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <h3>Upload Gambar</h3>
@@ -691,6 +759,24 @@
                         </button>
                     </div>
                 </div>
+                
+                <!-- AKSI SELEKSI -->
+                <div class="selection-actions hidden" id="selectionActions">
+                    <div class="selected-count">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="selectedCount">0</span> dipilih
+                    </div>
+                    <button class="btn btn-secondary" id="selectAllBtn">
+                        <i class="fas fa-check-square"></i> Pilih Semua
+                    </button>
+                    <button class="btn" id="deselectAllBtn">
+                        <i class="fas fa-square"></i> Batal Pilih
+                    </button>
+                    <button class="btn btn-success" id="copySelectedBtn">
+                        <i class="fas fa-copy"></i> Salin yang Dipilih
+                    </button>
+                </div>
+                
                 <div class="image-list" id="imageList">
                     <div class="empty-state" id="emptyState">
                         <i class="fas fa-image"></i>
@@ -726,7 +812,15 @@
             const totalSize = document.getElementById('totalSize');
             const starsContainer = document.getElementById('stars');
             
+            // Tambahan untuk fitur seleksi
+            const selectionActions = document.getElementById('selectionActions');
+            const selectedCount = document.getElementById('selectedCount');
+            const selectAllBtn = document.getElementById('selectAllBtn');
+            const deselectAllBtn = document.getElementById('deselectAllBtn');
+            const copySelectedBtn = document.getElementById('copySelectedBtn');
+            
             let uploadedImages = [];
+            let selectedImages = [];
             const apiKey = '8c809054a823728e39bbffc1d6676e3c';
             
             // Membuat efek bintang
@@ -772,6 +866,11 @@
             
             copyAllBtn.addEventListener('click', copyAllLinks);
             deleteAllBtn.addEventListener('click', deleteAllImages);
+            
+            // Event listener untuk tombol seleksi
+            selectAllBtn.addEventListener('click', selectAllImages);
+            deselectAllBtn.addEventListener('click', deselectAllImages);
+            copySelectedBtn.addEventListener('click', copySelectedLinks);
             
             function createStars() {
                 const starCount = 200;
@@ -955,6 +1054,7 @@
                 if (uploadedImages.length === 0) {
                     emptyState.style.display = 'block';
                     imageList.appendChild(emptyState);
+                    hideSelectionActions();
                     return;
                 }
                 
@@ -971,7 +1071,13 @@
                         newBadge = '<div class="new-badge">BARU</div>';
                     }
                     
+                    // Tambahkan checkbox di sini
+                    const isChecked = selectedImages.includes(image.id) ? 'checked' : '';
+                    
                     imageItem.innerHTML = `
+                        <div class="checkbox-container">
+                            <input type="checkbox" class="image-checkbox" data-id="${image.id}" ${isChecked}>
+                        </div>
                         ${newBadge}
                         <img src="${image.preview}" alt="${image.name}" class="image-preview">
                         <div class="image-link">
@@ -993,6 +1099,21 @@
                     imageList.appendChild(imageItem);
                 });
                 
+                // Event listener untuk checkbox
+                document.querySelectorAll('.image-checkbox').forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const imageId = this.getAttribute('data-id');
+                        if (this.checked) {
+                            if (!selectedImages.includes(imageId)) {
+                                selectedImages.push(imageId);
+                            }
+                        } else {
+                            selectedImages = selectedImages.filter(id => id !== imageId);
+                        }
+                        updateSelectionUI();
+                    });
+                });
+                
                 document.querySelectorAll('.copy-btn').forEach(button => {
                     button.addEventListener('click', function() {
                         const link = this.getAttribute('data-link');
@@ -1009,8 +1130,56 @@
                 });
             }
             
+            // Fungsi untuk memilih semua gambar
+            function selectAllImages() {
+                selectedImages = uploadedImages.map(image => image.id);
+                updateImageList();
+                updateSelectionUI();
+            }
+            
+            // Fungsi untuk membatalkan semua pilihan
+            function deselectAllImages() {
+                selectedImages = [];
+                updateImageList();
+                updateSelectionUI();
+            }
+            
+            // Fungsi untuk menyalin link gambar yang dipilih
+            function copySelectedLinks() {
+                if (selectedImages.length === 0) {
+                    showNotification('Tidak ada gambar yang dipilih', 'warning');
+                    return;
+                }
+                
+                const selectedLinks = uploadedImages
+                    .filter(image => selectedImages.includes(image.id))
+                    .map(image => image.link)
+                    .join('\n');
+                
+                copyToClipboard(selectedLinks);
+                showNotification(`${selectedImages.length} link berhasil disalin!`, 'success');
+            }
+            
+            // Fungsi untuk memperbarui UI seleksi
+            function updateSelectionUI() {
+                selectedCount.textContent = selectedImages.length;
+                
+                if (selectedImages.length > 0) {
+                    selectionActions.classList.remove('hidden');
+                } else {
+                    selectionActions.classList.add('hidden');
+                }
+            }
+            
+            // Fungsi untuk menyembunyikan aksi seleksi
+            function hideSelectionActions() {
+                selectionActions.classList.add('hidden');
+                selectedImages = [];
+            }
+            
             function deleteImage(id) {
                 uploadedImages = uploadedImages.filter(image => image.id !== id);
+                selectedImages = selectedImages.filter(selectedId => selectedId !== id);
                 saveImagesToStorage();
                 updateImageList();
                 updateStats();
@@ -1025,6 +1194,7 @@
                 
                 if (confirm(`Hapus semua ${uploadedImages.length} gambar?`)) {
                     uploadedImages = [];
+                    selectedImages = [];
                     saveImagesToStorage();
                     updateImageList();
                     updateStats();
